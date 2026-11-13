@@ -3,7 +3,7 @@
 Takes a GameMaker game file and the resources mods declare, and returns a modded
 game file. Library and CLI, plus the mod runtime (`@sculptr/sculptr/runtime`). Depends on
 [gm8-lib](https://github.com/QuentinJanuel/gm8-lib) and
-[gms-lib](https://github.com/QuentinJanuel/gms-lib), and on no emulator.
+[gms-lib](https://github.com/QuentinJanuel/gms-lib).
 
 ```sh
 npm install @sculptr/sculptr
