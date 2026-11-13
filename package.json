@@ -2,7 +2,7 @@
   "name": "@sculptr/sculptr",
   "version": "0.0.0",
   "description": "Patch GameMaker 8 and GameMaker Studio games with the resources mods declare.",
-  "homepage": "https://sculptr.dappermink.me",
+  "homepage": "https://quentinjanuel.github.io/sculptr/",
   "bugs": "https://github.com/QuentinJanuel/sculptr/issues",
   "license": "SEE LICENSE IN LICENSING.md",
   "repository": {

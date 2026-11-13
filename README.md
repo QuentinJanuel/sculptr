@@ -67,7 +67,7 @@ mod fails to load or activate: it exits 1 naming the mod, and leaves an existing
 
 ## Documentation
 
-`docs/` is the mod author's documentation, published at https://sculptr.dappermink.me. It is a
+`docs/` is the mod author's documentation, published at https://quentinjanuel.github.io/sculptr/. It is a
 Docusaurus site in its own workspace package: `pnpm --filter sculptr-docs build` writes
 `docs/dist`.
 
