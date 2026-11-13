@@ -1,0 +1,8 @@
+{
+  "label": "Talking to the game",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "How a mod's GML and its JavaScript exchange messages, and the game's own code as a mod reads it."
+  }
+}

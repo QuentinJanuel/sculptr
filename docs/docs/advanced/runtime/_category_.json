@@ -1,0 +1,8 @@
+{
+  "label": "The mod runtime",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "What a mod is underneath createMod: the raw activate(api) API, how a host names and loads bundles, and the contract a patched game, the runtime and every host agree on."
+  }
+}

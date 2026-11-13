@@ -1,0 +1,8 @@
+{
+  "label": "Raw resources",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "What a mod declares with api.resource.create() during activate(), for the patcher to install: the low-level form of what the SDK's mod.resource does for you. Read api.target first: GameMaker 8 (\"gm8\") and GameMaker Studio (\"gms\") do not accept the same GML."
+  }
+}

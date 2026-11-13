@@ -1,0 +1,8 @@
+packages:
+  - docs
+# pnpm fails an install on a build script it has no verdict for.
+allowBuilds:
+  # Its install script only prints a banner.
+  core-js: false
+  esbuild: true
+  workerd: set this to true or false

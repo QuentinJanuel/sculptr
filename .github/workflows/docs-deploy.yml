@@ -1,0 +1,37 @@
+name: Docs deploy
+
+# Started by hand (Actions > Docs deploy > Run workflow), from main only. Builds the docs into
+# docs/dist and publishes them with GitHub Pages. It needs no secret: Pages authenticates the
+# workflow itself, and the `github-pages` environment only lets main deploy.
+on: workflow_dispatch
+
+permissions:
+  contents: read
+  pages: write # the deployment
+  id-token: write # proves to Pages that this workflow is the one deploying
+
+concurrency:
+  group: docs-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --filter sculptr-docs
+      - run: pnpm --filter sculptr-docs build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

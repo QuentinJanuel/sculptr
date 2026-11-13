@@ -1,0 +1,49 @@
+sculptr
+=======
+
+Patches GameMaker 8 and GameMaker Studio games with the resources mods declare.
+
+Copyright (c) 2026 Dapper Mink. sculptr's own source is licensed MIT; see LICENSE.
+The built package also carries the components below, under their own licences;
+see LICENSING.md for how they combine.
+
+Repository dependencies
+-----------------------
+
+gm8-lib <https://github.com/QuentinJanuel/gm8-lib>, GPL-2.0-only, pinned by commit
+in Cargo.toml and fetched by cargo. It is built on gm8exe and gml-parser from
+OpenGMK <https://github.com/OpenGMK/OpenGMK>, GPL-2.0-only.
+
+gms-lib <https://github.com/QuentinJanuel/gms-lib>, GPL-3.0-only, the gms-lib git
+submodule. It brings its own submodules: UndertaleModTool
+<https://github.com/UnderminersTeam/UndertaleModTool> (GPL-3.0), through the fork
+<https://github.com/QuentinJanuel/UndertaleModTool>, and that one's Underanalyzer
+<https://github.com/UnderminersTeam/Underanalyzer> (MPL-2.0), through the fork
+<https://github.com/QuentinJanuel/Underanalyzer>.
+
+In the npm package
+------------------
+
+dist/gm8/ is gm8patch compiled to WebAssembly from gm8-lib, with gm8-lib's
+LICENSE and NOTICE beside it. Besides gm8-lib's own GPL-2.0-only code it links:
+  - Http Dll 2.3 by Maarten Baert, a GameMaker extension DLL embedded as data and
+    written into every GameMaker 8 game patched with a mod channel. It is a
+    separate work under the GNU LGPL; its source and licence are published at
+    <https://www.maartenbaert.be/game-maker-dlls/http-dll-2/>.
+  - Rust crates from crates.io, each available under the MIT licence (most also
+    under Apache-2.0): adler2, byteorder, cfg-if, crc32fast, crossbeam-deque,
+    crossbeam-epoch, crossbeam-utils, either, flate2, itoa, memchr, miniz_oxide,
+    once_cell, rayon, rayon-core, serde, serde_core, serde_json, simd-adler32,
+    wasm-bindgen, zmij. Cargo.lock in gm8-lib pins their versions.
+
+dist/gms/ is gms-lib's AOT-compiled .NET WebAssembly runtime, with gms-lib's
+LICENSE and NOTICE beside it. Besides gms-lib (GPL-3.0-only), UndertaleModLib
+(GPL-3.0) and Underanalyzer (MPL-2.0; source at the fork above) it contains:
+  - the .NET runtime and base class libraries <https://github.com/dotnet/runtime>,
+    MIT, including ICU data (Unicode licence);
+  - Roslyn, Microsoft.CodeAnalysis <https://github.com/dotnet/roslyn>, MIT;
+  - Magick.NET <https://github.com/dlemstra/Magick.NET>, Apache-2.0;
+  - SharpZipLib <https://github.com/icsharpcode/SharpZipLib>, MIT.
+
+The JavaScript in dist/ is sculptr's own source, bundled by esbuild; it has no
+runtime npm dependencies.

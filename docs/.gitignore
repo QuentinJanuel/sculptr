@@ -1,0 +1,3 @@
+# Docusaurus's build cache and its output.
+.docusaurus/
+dist/

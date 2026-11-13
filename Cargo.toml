@@ -1,0 +1,13 @@
+# Not a crate anyone builds: it exists so this package pins gm8-lib itself, rather than borrowing
+# an emulator's pin. scripts/build.ts asks cargo where the checkout is and builds gm8patch from it.
+[package]
+name = "sculptr-gm8-lib-pin"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[lib]
+path = "pin.rs"
+
+[dependencies]
+gm8patch = { git = "https://github.com/QuentinJanuel/gm8-lib", rev = "6b4ca316b8c69eafdc0d7f99397367b1286d9d18" }

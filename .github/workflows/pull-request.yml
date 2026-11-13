@@ -1,0 +1,52 @@
+name: Pull request
+
+# Checks every pull request: types, lint, format and tests, then the whole payload as release.yml
+# builds it (gm8-lib's gm8patch wasm and gms-lib's AOT .NET runtime), and the docs. Nothing is
+# published from here: releases and docs deploys are started by hand (release.yml, docs-deploy.yml).
+on: pull_request
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-request-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm test
+
+      # gm8-lib's rust-toolchain.toml names 1.77; wasm-bindgen matches the version in its Cargo.lock
+      # and needs a newer rustc to install.
+      - run: |
+          rustup toolchain install 1.77 --profile minimal --target wasm32-unknown-unknown --no-self-update
+          rustup default stable
+      - run: cargo install wasm-bindgen-cli --version 0.2.114 --locked
+      # Installed under the runner's temp directory, which the runner user owns, so the workload
+      # install below needs no sudo.
+      - uses: actions/setup-dotnet@v4
+        env:
+          DOTNET_INSTALL_DIR: ${{ runner.temp }}/dotnet
+        with:
+          dotnet-version: "10.0.x"
+      # gms-lib's AOT publish needs the Emscripten toolchain this workload brings.
+      - run: dotnet workload install wasm-tools
+      - run: npm run build --prefix gms-lib
+      - run: pnpm build:payload
+
+      - run: pnpm --filter sculptr-docs typecheck
+      - run: pnpm --filter sculptr-docs build

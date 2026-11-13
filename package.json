@@ -1,0 +1,82 @@
+{
+  "name": "@sculptr/sculptr",
+  "version": "0.0.0",
+  "description": "Patch GameMaker 8 and GameMaker Studio games with the resources mods declare.",
+  "homepage": "https://sculptr.dappermink.me",
+  "bugs": "https://github.com/QuentinJanuel/sculptr/issues",
+  "license": "SEE LICENSE IN LICENSING.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuentinJanuel/sculptr.git"
+  },
+  "bin": {
+    "sculptr": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "LICENSING.md",
+    "NOTICE"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./contract": {
+      "types": "./dist/contract.d.ts",
+      "default": "./dist/contract.js"
+    },
+    "./resources": {
+      "types": "./dist/resources.d.ts",
+      "default": "./dist/resources.js"
+    },
+    "./serve": {
+      "types": "./dist/serve.d.ts",
+      "default": "./dist/serve.js"
+    },
+    "./panel": {
+      "types": "./dist/panel.d.ts",
+      "default": "./dist/panel.js"
+    },
+    "./game-code": {
+      "types": "./dist/game-code.d.ts",
+      "default": "./dist/game-code.js"
+    },
+    "./channel": {
+      "types": "./dist/channel.d.ts",
+      "default": "./dist/channel.js"
+    },
+    "./ui": {
+      "types": "./dist/ui.d.ts",
+      "default": "./dist/ui.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "default": "./dist/runtime/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build:payload": "tsx scripts/build.ts",
+    "prepublishOnly": "npm run build --prefix gms-lib && npm run build:payload",
+    "test": "vitest run && node --test scripts/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "esbuild": "^0.28.2",
+    "happy-dom": "^21.0.4",
+    "oxfmt": "^0.64.0",
+    "oxlint": "^1.79.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.10"
+  },
+  "packageManager": "pnpm@11.5.0"
+}
