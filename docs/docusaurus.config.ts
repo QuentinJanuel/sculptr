@@ -7,8 +7,8 @@ const config: Config = {
   tagline: "Mods for GameMaker games",
 
   // The real origin: it builds the absolute URLs in the sitemap.
-  url: "https://sculptr.dappermink.me",
-  baseUrl: "/",
+  url: "https://quentinjanuel.github.io",
+  baseUrl: "/sculptr/",
 
   onBrokenLinks: "throw",
 
