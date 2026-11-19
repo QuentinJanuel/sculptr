@@ -10,4 +10,4 @@ publish = false
 path = "pin.rs"
 
 [dependencies]
-gm8patch = { git = "https://github.com/QuentinJanuel/gm8-lib", rev = "6b4ca316b8c69eafdc0d7f99397367b1286d9d18" }
+gm8patch = { git = "https://github.com/QuentinJanuel/gm8-lib", rev = "9da1ae2e3930f55493f828765bbbe1ed91ba6976" }
